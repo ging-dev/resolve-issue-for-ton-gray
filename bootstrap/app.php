@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\BoTonCanMiddlewareLamHa;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -11,8 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // hello bé tôn gray ;))
-        $middleware->redirectGuestsTo(fn () => route('auth.redirect'));
+        $middleware->alias(['auth' => BoTonCanMiddlewareLamHa::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
